@@ -927,7 +927,13 @@ class StandardScaler(TransformerMixin, BaseEstimator):
             Transformed array.
         """
         check_is_fitted(self)
-
+        # If input is 1D raise error
+        if X.ndim == 1:
+            raise ValueError(
+                "Expected 2D array, got 1D array instead:\narray={}.\n"
+                "Reshape your data either using array.reshape(-1, 1) if "
+                "your data has a single feature or array.reshape(1, -1) "
+                "if it contains a single sample.".format(X))
         copy = copy if copy is not None else self.copy
         if sparse.issparse(X):
             if self.with_mean:
