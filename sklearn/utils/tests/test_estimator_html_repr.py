@@ -17,6 +17,7 @@ from sklearn.feature_selection import SelectPercentile
 from sklearn.cluster import Birch
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import StandardScaler
 from sklearn.svm import LinearSVC
 from sklearn.svm import LinearSVR
 from sklearn.tree import DecisionTreeClassifier
@@ -28,6 +29,13 @@ from sklearn.gaussian_process.kernels import RationalQuadratic
 from sklearn.utils._estimator_html_repr import _write_label_html
 from sklearn.utils._estimator_html_repr import _get_visual_block
 from sklearn.utils._estimator_html_repr import estimator_html_repr
+
+
+def test_standard_scalar():
+    X = [[1], [2], [3]]
+    ss = StandardScaler().fit(X)
+    X_tran = ss.transform(X)
+    assert(ValueError, ss.inverse_transform(X_tran.reshape(-1)))
 
 
 @pytest.mark.parametrize("checked", [True, False])
