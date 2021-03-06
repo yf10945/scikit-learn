@@ -35,7 +35,7 @@ def test_standard_scalar():
     X = [[1], [2], [3]]
     ss = StandardScaler().fit(X)
     X_tran = ss.transform(X)
-    assert(ValueError, ss.inverse_transform(X_tran.reshape(-1)))
+    pytest.raises(ValueError, ss.inverse_transform(X_tran.reshape(-1)))
 
 
 @pytest.mark.parametrize("checked", [True, False])
